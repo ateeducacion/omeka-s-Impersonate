@@ -1,0 +1,169 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Impersonate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-02 21:53+0100\n"
+"PO-Revision-Date: 2023-11-15 12:00+0000\n"
+"Last-Translator: Área de Tecnología Educativa <ate@gobiernodecanarias.org>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: Module.php:183
+msgid "Researcher"
+msgstr "Investigador"
+
+#: Module.php:184
+msgid "Author"
+msgstr "Autor"
+
+#: Module.php:185
+msgid "Reviewer"
+msgstr "Revisor"
+
+#: Module.php:186
+msgid "Editor"
+msgstr "Editor"
+
+#: Module.php:187
+msgid "Site Admin"
+msgstr "Administrador del sitio"
+
+#: Module.php:188
+msgid "Global Administrator"
+msgstr "Administrador global"
+
+#: Module.php:193
+msgid "Minimum role that can impersonate"
+msgstr "Rol mínimo que puede suplantar"
+
+#: Module.php:207
+msgid "Users with this role or higher can impersonate lower roles."
+msgstr "Los usuarios con este rol o superior pueden suplantar a roles inferiores."
+
+#: Module.php:262
+msgid "switch to"
+msgstr "cambiar a"
+
+#: view/omeka/admin/user/browse-actions.phtml:34
+#: view/omeka/admin/user/browse-actions.phtml:35
+msgid "View"
+msgstr "Ver"
+
+#: view/omeka/admin/user/browse-actions.phtml:40
+#: view/omeka/admin/user/browse-actions.phtml:41
+msgid "Edit"
+msgstr "Editar"
+
+#: view/omeka/admin/user/browse-actions.phtml:47
+#: view/omeka/admin/user/browse-actions.phtml:48
+msgid "Delete"
+msgstr "Eliminar"
+
+#: view/omeka/admin/user/browse-actions.phtml:57
+msgid "Impersonate this user"
+msgstr "Suplantar a este usuario"
+
+#: view/omeka/admin/user/browse-actions.phtml:58
+msgid "Impersonate"
+msgstr "Suplantar"
+
+#: view/impersonate/admin/impersonation/banner.phtml:12
+msgid "unknown user"
+msgstr "usuario desconocido"
+
+#: view/impersonate/admin/impersonation/banner.phtml:15
+msgid "original administrator unknown"
+msgstr "administrador original desconocido"
+
+#: view/impersonate/admin/impersonation/banner.phtml:59
+msgid "You are impersonating"
+msgstr "Estás suplantando a"
+
+#: view/impersonate/admin/impersonation/banner.phtml:61
+#, php-format
+msgid "Original admin: %s"
+msgstr "Administrador original: %s"
+
+#: view/impersonate/admin/impersonation/banner.phtml:63
+#: view/impersonate/admin/impersonation/banner.phtml:64
+msgid "Return to admin"
+msgstr "Volver al administrador"
+
+#: src/Controller/ImpersonationController.php:39
+#: src/Controller/ImpersonationController.php:84
+msgid "Invalid CSRF token."
+msgstr "Token CSRF no válido."
+
+#: src/Controller/ImpersonationController.php:46
+msgid "A valid target user id is required."
+msgstr "Se requiere un identificador de usuario de destino válido."
+
+#: src/Controller/ImpersonationController.php:54
+msgid "The requested user was not found."
+msgstr "No se encontró el usuario solicitado."
+
+#: src/Controller/ImpersonationController.php:61
+msgid "You are not allowed to impersonate this user."
+msgstr "No tienes permiso para suplantar a este usuario."
+
+#: src/Controller/ImpersonationController.php:70
+#, php-format
+msgid "You are now impersonating %s."
+msgstr "Ahora estás suplantando a %s."
+
+#: src/Controller/ImpersonationController.php:90
+msgid "No impersonation session is active."
+msgstr "No hay una sesión de suplantación activa."
+
+#: src/Controller/ImpersonationController.php:99
+msgid "Impersonation ended. You have been restored as administrator."
+msgstr "Suplantación finalizada. Has sido restaurado como administrador."
+
+#: src/Controller/ImpersonationController.php:146
+msgid "Method not allowed."
+msgstr "Método no permitido."
+
+#~ msgid "Use mouse to rotate, zoom and pan"
+#~ msgstr "Usa el ratón para rotar, hacer zoom y desplazar"
+
+#~ msgid "Viewer Height (px)"
+#~ msgstr "Altura del visor (px)"
+
+#~ msgid "Default height for the 3D viewer in pixels."
+#~ msgstr "Altura predeterminada del visor 3D en píxeles."
+
+#~ msgid "Auto-rotate models"
+#~ msgstr "Rotar modelos automáticamente"
+
+#~ msgid "Enable auto-rotation for 3D models."
+#~ msgstr "Habilitar rotación automática para modelos 3D."
+
+#, fuzzy
+#~ msgid "Foreground Color"
+#~ msgstr "Color de objeto"
+
+#, fuzzy
+#~ msgid "Choose the foreground color for 3D viewers."
+#~ msgstr "Elija el color de objeto para los visores 3D."
+
+#~ msgid "Background Color"
+#~ msgstr "Color de fondo"
+
+#~ msgid "Choose the background color for 3D viewers."
+#~ msgstr "Elija el color de fondo para los visores 3D."
+
+#~ msgid "Show Grid"
+#~ msgstr "Mostrar rejilla"
+
+#~ msgid "Display a green grid to help with size perception."
+#~ msgstr "Mostrar una rejilla verde para ayudar con la percepción del tamaño."
+
+#~ msgid "GLB Viewer"
+#~ msgstr "Visor GLB"
+
+#~ msgid "STL Viewer"
+#~ msgstr "Visor STL"

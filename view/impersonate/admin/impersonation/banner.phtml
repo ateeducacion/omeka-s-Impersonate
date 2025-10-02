@@ -1,0 +1,66 @@
+<?php
+/**
+ * @var \Omeka\Entity\User|null $impersonatedUser
+ * @var \Omeka\Entity\User|null $originalAdmin
+ * @var string $endToken
+ */
+
+$translate = $this->plugin('translate');
+$escape = $this->plugin('escapeHtml');
+$impersonatedLabel = $impersonatedUser
+    ? ($impersonatedUser->getName() ?: $impersonatedUser->getEmail())
+    : $translate('unknown user');
+$originalLabel = $originalAdmin
+    ? ($originalAdmin->getName() ?: $originalAdmin->getEmail())
+    : $translate('original administrator unknown');
+
+$this->headStyle()->appendStyle(
+    '.impersonate-banner {' .
+    'position:sticky;' .
+    'top:0;' .
+    'left:0;' .
+    'right:0;' .
+    'z-index:10000;' .
+    'background:#fef3c7;' .
+    'border-bottom:2px solid #f59e0b;' .
+    'color:#1f2937;' .
+    'display:flex;' .
+    'justify-content:space-between;' .
+    'align-items:center;' .
+    'gap:1rem;' .
+    'padding:0.75rem 1rem;' .
+    'font-size:0.95rem;' .
+    '}' .
+    '.impersonate-banner strong{font-weight:600;}' .
+    '.impersonate-banner__form button,' .
+    '.impersonate-banner__link{' .
+    'background:#b91c1c !important;' .
+    'border:0;' .
+    'color:#fff !important;' .
+    'padding:0.5rem 1rem;' .
+    'cursor:pointer;' .
+    'border-radius:4px;' .
+    'display:inline-block;' .
+    'text-decoration:none !important;' .
+    '}' .
+    '.impersonate-banner__form button:hover,' .
+    '.impersonate-banner__form button:focus,' .
+    '.impersonate-banner__link:hover,' .
+    '.impersonate-banner__link:focus{' .
+    'background:#7f1d1d !important;' .
+    'color:#fff !important;' .
+    'text-decoration:none !important;' .
+    'outline:none;' .
+    '}'
+);
+?>
+<div class="impersonate-banner" role="alert" aria-live="assertive">
+    <div class="impersonate-banner__content">
+        <strong><?= $escape($translate('You are impersonating')); ?>:</strong>
+        <span><?= $escape($impersonatedLabel); ?></span>
+        <span class="impersonate-banner__original">(<?= $escape(sprintf($translate('Original admin: %s'), $originalLabel)); ?>)</span>
+    </div>
+    <a href="<?= $this->url('admin/impersonate/end'); ?>" class="impersonate-banner__link" title="<?= $escape($translate('Return to admin')); ?>">
+        <?= $escape($translate('Return to admin')); ?>
+    </a>
+</div>

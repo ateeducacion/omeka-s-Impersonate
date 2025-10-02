@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-02 21:53+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: Module.php:183
+msgid "Researcher"
+msgstr ""
+
+#: Module.php:184
+msgid "Author"
+msgstr ""
+
+#: Module.php:185
+msgid "Reviewer"
+msgstr ""
+
+#: Module.php:186
+msgid "Editor"
+msgstr ""
+
+#: Module.php:187
+msgid "Site Admin"
+msgstr ""
+
+#: Module.php:188
+msgid "Global Administrator"
+msgstr ""
+
+#: Module.php:193
+msgid "Minimum role that can impersonate"
+msgstr ""
+
+#: Module.php:207
+msgid "Users with this role or higher can impersonate lower roles."
+msgstr ""
+
+#: Module.php:262
+msgid "switch to"
+msgstr ""
+
+#: view/omeka/admin/user/browse-actions.phtml:34
+#: view/omeka/admin/user/browse-actions.phtml:35
+msgid "View"
+msgstr ""
+
+#: view/omeka/admin/user/browse-actions.phtml:40
+#: view/omeka/admin/user/browse-actions.phtml:41
+msgid "Edit"
+msgstr ""
+
+#: view/omeka/admin/user/browse-actions.phtml:47
+#: view/omeka/admin/user/browse-actions.phtml:48
+msgid "Delete"
+msgstr ""
+
+#: view/omeka/admin/user/browse-actions.phtml:57
+msgid "Impersonate this user"
+msgstr ""
+
+#: view/omeka/admin/user/browse-actions.phtml:58
+msgid "Impersonate"
+msgstr ""
+
+#: view/impersonate/admin/impersonation/banner.phtml:12
+msgid "unknown user"
+msgstr ""
+
+#: view/impersonate/admin/impersonation/banner.phtml:15
+msgid "original administrator unknown"
+msgstr ""
+
+#: view/impersonate/admin/impersonation/banner.phtml:59
+msgid "You are impersonating"
+msgstr ""
+
+#: view/impersonate/admin/impersonation/banner.phtml:61
+#, php-format
+msgid "Original admin: %s"
+msgstr ""
+
+#: view/impersonate/admin/impersonation/banner.phtml:63
+#: view/impersonate/admin/impersonation/banner.phtml:64
+msgid "Return to admin"
+msgstr ""
+
+#: src/Controller/ImpersonationController.php:39
+#: src/Controller/ImpersonationController.php:84
+msgid "Invalid CSRF token."
+msgstr ""
+
+#: src/Controller/ImpersonationController.php:46
+msgid "A valid target user id is required."
+msgstr ""
+
+#: src/Controller/ImpersonationController.php:54
+msgid "The requested user was not found."
+msgstr ""
+
+#: src/Controller/ImpersonationController.php:61
+msgid "You are not allowed to impersonate this user."
+msgstr ""
+
+#: src/Controller/ImpersonationController.php:70
+#, php-format
+msgid "You are now impersonating %s."
+msgstr ""
+
+#: src/Controller/ImpersonationController.php:90
+msgid "No impersonation session is active."
+msgstr ""
+
+#: src/Controller/ImpersonationController.php:99
+msgid "Impersonation ended. You have been restored as administrator."
+msgstr ""
+
+#: src/Controller/ImpersonationController.php:146
+msgid "Method not allowed."
+msgstr ""

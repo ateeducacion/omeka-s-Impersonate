@@ -1,0 +1,60 @@
+{
+    "name": "ateeducacion/omeka-s-impersonate",
+    "description": "Allows Omeka S administrators to securely impersonate other users with full auditing",
+    "type": "omeka-s-module",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Área de Tecnología Educativa",
+            "email": "ate.educacion@gobiernodecanarias.org"
+        }
+    ],
+    "homepage": "https://github.com/ateeducacion/omeka-s-Impersonate",
+    "support": {
+        "issues": "https://github.com/ateeducacion/omeka-s-Impersonate/issues"
+    },
+    "keywords": [
+        "Omeka S",
+        "module",
+        "impersonate",
+        "security",
+        "auditing"
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        },
+        "allow-plugins": {
+            "omeka/composer-addon-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "*",
+        "zerocrates/extract-tagged-strings": "dev-master",
+        "laminas/laminas-form": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Impersonate\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ImpersonateTest\\": "test/",
+            "Omeka\\": "test/Stubs/Omeka/",
+            "Laminas\\": "test/Stubs/Laminas/"
+        }
+    },
+    "repositories": [
+        {
+        "type": "vcs",
+        "url": "https://github.com/zerocrates/extract-tagged-strings.git"
+        }
+    ]
+}

@@ -1,0 +1,63 @@
+<?php
+/**
+ * @var \Omeka\Entity\User $user
+ */
+
+use Impersonate\Service\ImpersonationService;
+
+$translate = $this->plugin('translate');
+$url = $this->plugin('url');
+$escape = $this->plugin('escapeHtml');
+$userIsAllowed = $this->plugin('userIsAllowed');
+$helpers = $this->getHelperPluginManager();
+$services = method_exists($helpers, 'getServiceLocator') ? $helpers->getServiceLocator() : null;
+
+/** @var ImpersonationService|null $impersonationService */
+$impersonationService = $services ? $services->get(ImpersonationService::class) : null;
+$canImpersonate = $impersonationService ? $impersonationService->canImpersonate($user) : false;
+$csrfToken = $impersonationService ? $impersonationService->getCsrfToken(ImpersonationService::CSRF_START) : '';
+
+$this->headStyle()->appendStyle(
+    '.impersonate-inline-form{display:inline;}' .
+    '.impersonate-inline-form button{' .
+    'background:transparent;' .
+    'border:0;' .
+    'color:#0b7285;' .
+    'cursor:pointer;' .
+    'padding:0;' .
+    '}' .
+    '.impersonate-inline-form button:hover{color:#0c4a6e;text-decoration:underline;}'
+);
+?>
+<ul class="actions">
+    <li>
+        <a href="<?= $url('admin/user/id', ['action' => 'show', 'id' => $user->getId()]); ?>" class="o-icon-show" title="<?= $escape($translate('View')); ?>">
+            <?= $escape($translate('View')); ?>
+        </a>
+    </li>
+    <?php if ($userIsAllowed($user, 'update')): ?>
+    <li>
+        <a href="<?= $url('admin/user/id', ['action' => 'edit', 'id' => $user->getId()]); ?>" class="o-icon-edit" title="<?= $escape($translate('Edit')); ?>">
+            <?= $escape($translate('Edit')); ?>
+        </a>
+    </li>
+    <?php endif; ?>
+    <?php if ($userIsAllowed($user, 'delete')): ?>
+    <li>
+        <a href="<?= $url('admin/user/id', ['action' => 'delete', 'id' => $user->getId()]); ?>" class="o-icon-delete" title="<?= $escape($translate('Delete')); ?>">
+            <?= $escape($translate('Delete')); ?>
+        </a>
+    </li>
+    <?php endif; ?>
+    <?php if ($canImpersonate): ?>
+    <li>
+        <form method="post" action="<?= $url('admin/impersonate/start'); ?>" class="impersonate-inline-form">
+            <input type="hidden" name="target_user_id" value="<?= $this->escapeHtmlAttr((string) $user->getId()); ?>">
+            <input type="hidden" name="csrf" value="<?= $this->escapeHtmlAttr($csrfToken); ?>">
+            <button type="submit" class="impersonate-inline-button" title="<?= $escape($translate('Impersonate this user')); ?>">
+                <?= $escape($translate('Impersonate')); ?>
+            </button>
+        </form>
+    </li>
+    <?php endif; ?>
+</ul>

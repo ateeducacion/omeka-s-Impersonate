@@ -1,0 +1,132 @@
+services:
+
+  omekas:
+    image: erseco/alpine-omeka-s:develop
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+    # Use another host port to avoid clash with Moodle (both expose 8080 internally)
+    ports:
+      - "8080:8080"
+    environment:
+      # DB (separate database & user)
+
+      DB_HOST: mariadb
+      DB_NAME: omeka
+      DB_USER: omeka
+      DB_PASSWORD: omeka
+      DB_PORT: 3306
+
+      # MYSQL_DATABASE: omeka
+      # MYSQL_USER: omeka
+      # MYSQL_PASSWORD: omeka
+      # MYSQL_HOST: mariadb
+      # DB_PORT: 3306
+
+      # Omeka initial admin + site
+      OMEKA_ADMIN_EMAIL: admin@example.com
+      OMEKA_ADMIN_NAME: "Site Administrator"
+      OMEKA_ADMIN_PASSWORD: PLEASE_CHANGEME
+      OMEKA_SITE_TITLE: "Omeka S Sample Site"
+
+      # Optional but recommended so CLI jobs build correct URLs
+      SITE_URL: http://localhost:8080
+      APPLICATION_ENV: development
+
+      # Auto-install theme/modules (names or URLs). CSVImport must be present.
+      OMEKA_THEMES: "default"
+      OMEKA_MODULES: |
+        Common
+        EasyAdmin
+        Adminer
+
+      # Auto-import sample data on first boot
+      OMEKA_CSV_IMPORT_FILE: /data/sample_data.csv
+      PRE_CONFIGURE_COMMANDS: |
+        echo 'This is a pre-configure command'
+      POST_CONFIGURE_COMMANDS: |
+        echo 'This is a post-configure command'
+
+        # site_admin
+        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "siteadmin@example.com")' >/dev/null; then
+          echo "Creating user siteadmin@example.com with role site_admin..."
+          omeka-s-cli user:add "siteadmin@example.com" "Site Admin" site_admin "1234"
+        else
+          echo "User siteadmin@example.com already exists. Skipping."
+        fi
+
+        # editor
+        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "editor@example.com")' >/dev/null; then
+          echo "Creating user editor@example.com with role editor..."
+          omeka-s-cli user:add "editor@example.com" "Editor" editor "1234"
+        else
+          echo "User editor@example.com already exists. Skipping."
+        fi
+
+        # author
+        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "author@example.com")' >/dev/null; then
+          echo "Creating user author@example.com with role author..."
+          omeka-s-cli user:add "author@example.com" "Author" author "1234"
+        else
+          echo "User author@example.com already exists. Skipping."
+        fi
+
+        # reviewer
+        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "reviewer@example.com")' >/dev/null; then
+          echo "Creating user reviewer@example.com with role reviewer..."
+          omeka-s-cli user:add "reviewer@example.com" "Reviewer" reviewer "1234"
+        else
+          echo "User reviewer@example.com already exists. Skipping."
+        fi
+
+        # researcher
+        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "researcher@example.com")' >/dev/null; then
+          echo "Creating user researcher@example.com with role researcher..."
+          omeka-s-cli user:add "researcher@example.com" "Researcher" researcher "1234"
+        else
+          echo "User researcher@example.com already exists. Skipping."
+        fi
+
+
+    volumes:
+      - omekas_data:/var/www/html/volume:Z
+      - ./data:/data:ro
+      - ./:/var/www/html/volume/modules/Impersonate
+
+
+
+  # omekas:
+  #   image: ghcr.io/erseco/omeka-s-docker:master
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8000:80
+  #   volumes:
+  #     - omekas_data:/var/www/html/volume:Z
+  #     - ./:/var/www/html/volume/modules/Impersonate
+  #   environment:
+  #     MYSQL_DATABASE: omeka
+  #     MYSQL_USER: omeka
+  #     MYSQL_PASSWORD: omeka
+  #     MYSQL_HOST: mariadb
+  #     APPLICATION_ENV: development
+  #     OMEKA_THEMES: https://github.com/omeka-s-themes/default/releases/download/v1.9.1/theme-default-v1.9.1.zip
+  #     OMEKA_MODULES: |
+  #       https://github.com/Daniel-KM/Omeka-S-module-Common/releases/download/3.4.66/Common-3.4.66.zip      
+  #       https://github.com/Daniel-KM/Omeka-S-module-EasyAdmin/releases/download/3.4.29/EasyAdmin-3.4.29.zip
+  #       https://github.com/Daniel-KM/Omeka-S-module-Adminer/releases/download/3.4.5-4.8.4/Adminer-3.4.5-4.8.4.zip
+
+  mariadb:
+    image: mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: omeka
+      MYSQL_DATABASE: omeka
+      MYSQL_USER: omeka
+      MYSQL_PASSWORD: omeka
+
+volumes:
+  mariadb_data:
+  omekas_data:
+
