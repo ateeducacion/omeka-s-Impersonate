@@ -1,5 +1,7 @@
 # Impersonate for Omeka S
 
+![Screenshot of the 3D Viewer](https://raw.githubusercontent.com/ateeducacion/omeka-s-Impersonate/refs/heads/main/.github/assets/screenshot.png)
+
 Impersonate lets trusted staff sign in as another user to reproduce issues or provide support, then return to their own account safely.
 
 ## What it does
