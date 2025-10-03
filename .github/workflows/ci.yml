@@ -32,10 +32,7 @@ jobs:
       - name: Check untranslated strings
         run: make check-untranslated
 
-      - name: Check untranslated strings
-        run: make check-untranslated
-
-      - name: Check untranslated strings
+      - name: Generate .mo file
         run: make compile-mo
 
       - name: Run code linting

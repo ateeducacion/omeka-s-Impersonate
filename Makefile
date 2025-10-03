@@ -66,7 +66,7 @@ fix:
 
 # Open a shell inside the omekas container
 shell: check-docker
-	docker compose exec omekas bash
+	docker compose exec omekas sh
 
 # Clean up and stop Docker containers, removing volumes and orphan containers
 clean: check-docker

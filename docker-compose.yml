@@ -10,18 +10,11 @@ services:
       - "8080:8080"
     environment:
       # DB (separate database & user)
-
       DB_HOST: mariadb
       DB_NAME: omeka
       DB_USER: omeka
       DB_PASSWORD: omeka
       DB_PORT: 3306
-
-      # MYSQL_DATABASE: omeka
-      # MYSQL_USER: omeka
-      # MYSQL_PASSWORD: omeka
-      # MYSQL_HOST: mariadb
-      # DB_PORT: 3306
 
       # Omeka initial admin + site
       OMEKA_ADMIN_EMAIL: admin@example.com
@@ -37,6 +30,7 @@ services:
       OMEKA_THEMES: "default"
       OMEKA_MODULES: |
         Common
+        Log
         EasyAdmin
         Adminer
 
@@ -87,33 +81,13 @@ services:
           echo "User researcher@example.com already exists. Skipping."
         fi
 
+        # enable Impersonate module
+        omeka-s-cli module:install Impersonate
 
     volumes:
       - omekas_data:/var/www/html/volume:Z
       - ./data:/data:ro
       - ./:/var/www/html/volume/modules/Impersonate
-
-
-
-  # omekas:
-  #   image: ghcr.io/erseco/omeka-s-docker:master
-  #   restart: unless-stopped
-  #   ports:
-  #     - 8000:80
-  #   volumes:
-  #     - omekas_data:/var/www/html/volume:Z
-  #     - ./:/var/www/html/volume/modules/Impersonate
-  #   environment:
-  #     MYSQL_DATABASE: omeka
-  #     MYSQL_USER: omeka
-  #     MYSQL_PASSWORD: omeka
-  #     MYSQL_HOST: mariadb
-  #     APPLICATION_ENV: development
-  #     OMEKA_THEMES: https://github.com/omeka-s-themes/default/releases/download/v1.9.1/theme-default-v1.9.1.zip
-  #     OMEKA_MODULES: |
-  #       https://github.com/Daniel-KM/Omeka-S-module-Common/releases/download/3.4.66/Common-3.4.66.zip      
-  #       https://github.com/Daniel-KM/Omeka-S-module-EasyAdmin/releases/download/3.4.29/EasyAdmin-3.4.29.zip
-  #       https://github.com/Daniel-KM/Omeka-S-module-Adminer/releases/download/3.4.5-4.8.4/Adminer-3.4.5-4.8.4.zip
 
   mariadb:
     image: mariadb:latest
