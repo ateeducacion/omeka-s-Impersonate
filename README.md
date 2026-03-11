@@ -1,5 +1,10 @@
 # Impersonate for Omeka S
 
+<a href="https://ateeducacion.github.io/omeka-s-playground/?blueprint=https%3A%2F%2Fraw.githubusercontent.com%2Fateeducacion%2Fomeka-s-Impersonate%2Frefs%2Fheads%2Fmain%2Fblueprint.json">
+  <img src="https://raw.githubusercontent.com/ateeducacion/omeka-s-playground/main/ogimage.png" alt="Try Impersonate in your browser" width="220">
+</a><br>
+<small><a href="https://ateeducacion.github.io/omeka-s-playground/?blueprint=https%3A%2F%2Fraw.githubusercontent.com%2Fateeducacion%2Fomeka-s-Impersonate%2Frefs%2Fheads%2Fmain%2Fblueprint.json">Try in your browser</a></small>
+
 ![Screenshot of the 3D Viewer](https://raw.githubusercontent.com/ateeducacion/omeka-s-Impersonate/refs/heads/main/.github/assets/screenshot.png)
 
 Impersonate lets trusted staff sign in as another user to reproduce issues or provide support, then return to their own account safely.
@@ -71,4 +76,3 @@ The **Impersonate module** is automatically enabled, so you can start testing ri
 * `make test` – Run PHPUnit tests
 
 Run `make help` for a full list.
-
