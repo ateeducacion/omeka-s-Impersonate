@@ -69,7 +69,7 @@ class Module extends AbstractModule
         $uri = method_exists($request, 'getUri') ? $request->getUri() : null;
         $path = $uri ? (string) $uri->getPath() : '';
         $isGet = method_exists($request, 'isPost') ? !$request->isPost() : true;
-        if ($isGet && strpos($path, '/admin/impersonate/end') === 0) {
+        if ($isGet && preg_match('~(?:^|/)admin/impersonate/end/?$~', $path)) {
             if ($impersonation->isImpersonating()) {
                 try {
                     $impersonation->endImpersonation($this->getIpFromRequest($request));
@@ -78,7 +78,8 @@ class Module extends AbstractModule
                 }
             }
             $response = $event->getResponse() ?: new \Laminas\Http\Response();
-            $response->getHeaders()->addHeaderLine('Location', '/admin');
+            $redirectPath = preg_replace('~/admin/impersonate/end/?$~', '/admin', $path);
+            $response->getHeaders()->addHeaderLine('Location', $redirectPath ?: '/admin');
             $response->setStatusCode(302);
             $event->setResponse($response);
             $event->stopPropagation(true);
@@ -286,12 +287,20 @@ class Module extends AbstractModule
             $js = <<<'JS'
             (function($){
               function inject(){
-                if (!$('body').is('.users.browse')) return;
+                if (!$('body').is('.users.browse') && !/\/admin\/user\/?$/.test(window.location.pathname)) return;
+                function userIdFromHref(href){
+                  var m = (href || '').match(/\/admin\/user\/(\d+)(?:[\/?#]|$)/);
+                  return m ? parseInt(m[1], 10) : null;
+                }
+                function buildLoginUrl(uid){
+                  var url = new URL(window.location.href);
+                  url.searchParams.set('login_as', uid);
+                  return url.pathname + url.search + url.hash;
+                }
                 function currentUserId(){
                   var headerLink = $('#user .user-id a.user-show');
                   if (!headerLink.length) return null;
-                  var m = headerLink.attr('href').match(/\/admin\/user\/(\d+)/);
-                  return m ? parseInt(m[1], 10) : null;
+                  return userIdFromHref(headerLink.attr('href'));
                 }
                 function hasAdminInName($nameLink){
                   var t = ($nameLink.text() || '').toLowerCase();
@@ -300,12 +309,14 @@ class Module extends AbstractModule
                 var me = currentUserId();
                 $('table.tablesaw tbody tr').each(function(){
                   var $row = $(this);
-                  var $nameLink = $row.find('a[href^="/admin/user/"]').first();
+                  var $nameLink = $row.find('a').not('ul.actions a').filter(function(){
+                    return userIdFromHref($(this).attr('href')) !== null;
+                  }).first();
                   var href = $nameLink.attr('href');
                   if (!href) return;
-                  var m = href.match(/\/admin\/user\/(\d+)/);
-                  if (!m) return;
-                  var uid = parseInt(m[1], 10);
+                  var uid = userIdFromHref(href);
+                  if (!uid) return;
+                  var loginUrl = buildLoginUrl(uid);
                   if (me && uid === me) return; // skip myself
                   if (hasAdminInName($nameLink)) return; // skip admins/supervisors
 
@@ -315,7 +326,7 @@ class Module extends AbstractModule
                     var link = ''+
                       '<li>'+
                       '<a class="o-icon-user impersonate-inline-link" ' +
-                      'href="/admin/user?login_as='+uid+'" title="Impersonate"></a>'+
+                      'href="'+loginUrl+'" title="Impersonate"></a>'+
                       '</li>';
                     $actions.append(link);
                   }
@@ -324,7 +335,7 @@ class Module extends AbstractModule
                   if ($nameLink.length && !$row.find('a.impersonate-switch-link').length) {
                     var switchLink = $('<a/>', {
                       'class': 'impersonate-switch-link',
-                      'href': '/admin/user?login_as=' + uid,
+                      'href': loginUrl,
                       'text': ' · %%SWITCH_TEXT%%',
                       'title': 'Impersonate'
                     });
