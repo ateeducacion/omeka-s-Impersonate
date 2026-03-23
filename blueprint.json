@@ -3,7 +3,7 @@
   "meta": {
     "title": "Impersonate Playground Blueprint",
     "author": "ateeducacion",
-    "description": "Prepara Omeka S Playground con varios roles y recursos de ejemplo para probar el modulo Impersonate."
+    "description": "Prepara Omeka S Playground con varios roles y recursos de ejemplo para probar el módulo Impersonate."
   },
   "preferredVersions": {
     "php": "8.3",
@@ -79,7 +79,7 @@
   "itemSets": [
     {
       "title": "Impersonate Playground Collection",
-      "description": "Coleccion de ejemplo para validar que la sesion impersonada puede navegar por recursos del playground."
+      "description": "Colección de ejemplo para validar que la sesión impersonada puede navegar por recursos del playground."
     }
   ],
   "items": [
@@ -118,7 +118,7 @@
     "title": "Impersonate Demo",
     "slug": "demo",
     "theme": "default",
-    "summary": "Instalacion lista para probar Impersonate con varios roles y recursos de ejemplo en Omeka S Playground.",
+    "summary": "Instalación lista para probar Impersonate con varios roles y recursos de ejemplo en Omeka S Playground.",
     "isPublic": true,
     "setAsDefault": true
   }
