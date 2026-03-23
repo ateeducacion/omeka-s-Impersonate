@@ -79,7 +79,10 @@ class Module extends AbstractModule
             }
             $response = $event->getResponse() ?: new \Laminas\Http\Response();
             $redirectPath = preg_replace('~/admin/impersonate/end/?$~', '/admin', $path);
-            $response->getHeaders()->addHeaderLine('Location', $redirectPath ?: '/admin');
+            if ($redirectPath === null || $redirectPath === $path) {
+                $redirectPath = '/admin';
+            }
+            $response->getHeaders()->addHeaderLine('Location', $redirectPath);
             $response->setStatusCode(302);
             $event->setResponse($response);
             $event->stopPropagation(true);
@@ -293,9 +296,13 @@ class Module extends AbstractModule
                   return m ? parseInt(m[1], 10) : null;
                 }
                 function buildLoginUrl(uid){
-                  var url = new URL(window.location.href);
-                  url.searchParams.set('login_as', uid);
-                  return url.pathname + url.search + url.hash;
+                  try {
+                    var url = new URL(window.location.href);
+                    url.searchParams.set('login_as', uid);
+                    return url.pathname + url.search + url.hash;
+                  } catch (e) {
+                    return window.location.pathname + '?login_as=' + encodeURIComponent(uid);
+                  }
                 }
                 function currentUserId(){
                   var headerLink = $('#user .user-id a.user-show');
