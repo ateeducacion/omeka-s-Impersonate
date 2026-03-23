@@ -32,6 +32,15 @@ Impersonate lets trusted staff sign in as another user to reproduce issues or pr
 - Or use `/admin/anything?login_as=<id>` to switch directly.
 - A banner appears at the very top; click “Return to admin” to revert.
 
+## Playground demo data
+
+The bundled [`blueprint.json`](./blueprint.json) is prepared for browser-based testing in [Omeka S Playground](https://ateeducacion.github.io/omeka-s-playground/):
+
+- It logs in as `admin@example.com` / `password`.
+- It opens directly on `/admin/user`, where the impersonation links are visible.
+- It creates additional users for the role ladder used by the module: `siteadmin`, `editor`, `author`, `reviewer`, and `researcher`.
+- It adds a small public collection with sample items reused from the playground assets so the impersonated session has content to browse.
+
 ## Permissions & compatibility
 
 - Registers resource `impersonate` with privilege `manage_impersonation`.

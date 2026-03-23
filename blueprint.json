@@ -1,20 +1,69 @@
 {
   "$schema": "https://ateeducacion.github.io/omeka-s-playground/assets/blueprints/blueprint-schema.json",
+  "meta": {
+    "title": "Impersonate Playground Blueprint",
+    "author": "ateeducacion",
+    "description": "Prepara Omeka S Playground con varios roles y recursos de ejemplo para probar el módulo Impersonate."
+  },
+  "preferredVersions": {
+    "php": "8.3",
+    "omeka": "4.2.0"
+  },
   "debug": {
     "enabled": true
   },
-  "landingPage": "/admin",
+  "landingPage": "/admin/user",
   "siteOptions": {
     "title": "Impersonate Playground",
     "locale": "es",
     "timezone": "Atlantic/Canary"
+  },
+  "login": {
+    "email": "admin@example.com",
+    "password": "password"
   },
   "users": [
     {
       "username": "admin",
       "email": "admin@example.com",
       "password": "password",
-      "role": "global_admin"
+      "role": "global_admin",
+      "isActive": true
+    },
+    {
+      "username": "siteadmin",
+      "email": "siteadmin@example.com",
+      "password": "1234",
+      "role": "site_admin",
+      "isActive": true
+    },
+    {
+      "username": "editor",
+      "email": "editor@example.com",
+      "password": "1234",
+      "role": "editor",
+      "isActive": true
+    },
+    {
+      "username": "author",
+      "email": "author@example.com",
+      "password": "1234",
+      "role": "author",
+      "isActive": true
+    },
+    {
+      "username": "reviewer",
+      "email": "reviewer@example.com",
+      "password": "1234",
+      "role": "reviewer",
+      "isActive": true
+    },
+    {
+      "username": "researcher",
+      "email": "researcher@example.com",
+      "password": "1234",
+      "role": "researcher",
+      "isActive": true
     }
   ],
   "modules": [
@@ -27,11 +76,49 @@
       }
     }
   ],
+  "itemSets": [
+    {
+      "title": "Impersonate Playground Collection",
+      "description": "Colección de ejemplo para validar que la sesión impersonada puede navegar por recursos del playground."
+    }
+  ],
+  "items": [
+    {
+      "title": "The Garden of Earthly Delights",
+      "description": "Muestra publica reutilizada desde los recursos del propio playground.",
+      "creator": "Hieronymus Bosch",
+      "itemSets": [
+        "Impersonate Playground Collection"
+      ],
+      "media": [
+        {
+          "type": "url",
+          "url": "./assets/samples/garden-of-earthly-delights.png",
+          "title": "The Garden of Earthly Delights"
+        }
+      ]
+    },
+    {
+      "title": "Thomas Carlyle Oil Painting 1868",
+      "description": "Otra muestra publica reutilizada desde el playground para dejar contenido navegable tras el login.",
+      "creator": "George Frederic Watts",
+      "itemSets": [
+        "Impersonate Playground Collection"
+      ],
+      "media": [
+        {
+          "type": "url",
+          "url": "./assets/samples/thomas-carlyle-oil-painting-1868.jpg",
+          "title": "Thomas Carlyle Oil Painting 1868"
+        }
+      ]
+    }
+  ],
   "site": {
     "title": "Impersonate Demo",
     "slug": "demo",
     "theme": "default",
-    "summary": "Instalacion minima para probar el modulo Impersonate en Omeka S Playground.",
+    "summary": "Instalación lista para probar Impersonate con varios roles y recursos de ejemplo en Omeka S Playground.",
     "isPublic": true,
     "setAsDefault": true
   }
