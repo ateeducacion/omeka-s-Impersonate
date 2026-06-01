@@ -125,22 +125,22 @@ class Module extends AbstractModule
             return; // Silent ignore on any failure
         }
 
-        // Redirect to same URL without the login_as param to prevent repeat
-        $uri = clone $request->getUri();
-        $query = $uri->getQuery();
-        $params = [];
-        if (is_string($query) && $query !== '') {
-            parse_str($query, $params);
+        // Redirect to the admin dashboard rather than back to the originating page.
+        // Impersonation is usually triggered from the users list (/admin/user),
+        // which the now-impersonated, lower-privileged user typically cannot access
+        // and would 403 on. The admin root is safe for every impersonable role and
+        // matches the POST start flow (ImpersonationController::startAction).
+        $adminPath = preg_replace('~(/admin)(?:/.*)?$~', '$1', $path);
+        if (!is_string($adminPath) || $adminPath === '') {
+            $adminPath = '/admin';
         }
-        unset($params['login_as']);
-        $uri->setQuery(http_build_query($params));
 
         $response = $event->getResponse();
         if (!$response) {
             $response = new \Laminas\Http\Response();
             $event->setResponse($response);
         }
-        $response->getHeaders()->addHeaderLine('Location', $uri->toString());
+        $response->getHeaders()->addHeaderLine('Location', $adminPath);
         $response->setStatusCode(302);
         $event->stopPropagation(true);
     }
