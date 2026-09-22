@@ -5,3 +5,7 @@
 # PHPUnit cache files
 test/.phpunit.result.cache
 themes/
+
+/coverage.xml
+/.phpunit.cache/
+/.phpunit.result.cache

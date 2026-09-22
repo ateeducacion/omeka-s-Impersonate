@@ -1,5 +1,7 @@
 # Impersonate for Omeka S
 
+[![codecov](https://codecov.io/gh/ateeducacion/omeka-s-Impersonate/branch/main/graph/badge.svg)](https://codecov.io/gh/ateeducacion/omeka-s-Impersonate)
+
 <a href="https://ateeducacion.github.io/omeka-s-playground/?blueprint=https%3A%2F%2Fraw.githubusercontent.com%2Fateeducacion%2Fomeka-s-Impersonate%2Frefs%2Fheads%2Fmain%2Fblueprint.json">
   <img src="https://raw.githubusercontent.com/ateeducacion/omeka-s-Impersonate/refs/heads/main/.github/assets/playground-preview-button.svg" alt="Try Impersonate in your browser" width="224">
 </a><br>
@@ -85,3 +87,10 @@ The **Impersonate module** is automatically enabled, so you can start testing ri
 * `make test` – Run PHPUnit tests
 
 Run `make help` for a full list.
+
+## Coverage
+
+Run `make test-coverage` with PCOV or Xdebug enabled to measure `Module.php` and all
+PHP files under `src/`. The target writes `coverage.xml` and fails below 90% line
+coverage. CI uploads the report to Codecov using OIDC; project and patch coverage
+targets are both 90%.

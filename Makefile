@@ -183,3 +183,9 @@ help:
 
 # Set help as the default goal if no target is specified
 .DEFAULT_GOAL := help
+
+.PHONY: test-coverage
+test-coverage:
+	@rm -f coverage.xml
+	php -d pcov.directory=. vendor/bin/phpunit -c test/phpunit.xml --coverage-clover coverage.xml
+	php test/check-coverage.php coverage.xml 90
