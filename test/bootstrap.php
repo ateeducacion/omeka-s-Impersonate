@@ -14,7 +14,7 @@ spl_autoload_register(function (string $class): void {
         }
     }
     if ($class === 'Impersonate\\Module') {
-        $file = __DIR__ . '/Stubs/Impersonate/Module.php';
+        $file = dirname(__DIR__) . '/Module.php';
         if (is_file($file)) {
             require $file;
         }
