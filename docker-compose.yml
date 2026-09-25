@@ -42,7 +42,7 @@ services:
         echo 'This is a post-configure command'
 
         # site_admin
-        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "siteadmin@example.com")' >/dev/null; then
+        if ! omeka-s-cli user:exists "siteadmin@example.com" >/dev/null 2>&1; then
           echo "Creating user siteadmin@example.com with role site_admin..."
           omeka-s-cli user:add "siteadmin@example.com" "Site Admin" site_admin "1234"
         else
@@ -50,7 +50,7 @@ services:
         fi
 
         # editor
-        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "editor@example.com")' >/dev/null; then
+        if ! omeka-s-cli user:exists "editor@example.com" >/dev/null 2>&1; then
           echo "Creating user editor@example.com with role editor..."
           omeka-s-cli user:add "editor@example.com" "Editor" editor "1234"
         else
@@ -58,7 +58,7 @@ services:
         fi
 
         # author
-        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "author@example.com")' >/dev/null; then
+        if ! omeka-s-cli user:exists "author@example.com" >/dev/null 2>&1; then
           echo "Creating user author@example.com with role author..."
           omeka-s-cli user:add "author@example.com" "Author" author "1234"
         else
@@ -66,7 +66,7 @@ services:
         fi
 
         # reviewer
-        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "reviewer@example.com")' >/dev/null; then
+        if ! omeka-s-cli user:exists "reviewer@example.com" >/dev/null 2>&1; then
           echo "Creating user reviewer@example.com with role reviewer..."
           omeka-s-cli user:add "reviewer@example.com" "Reviewer" reviewer "1234"
         else
@@ -74,7 +74,7 @@ services:
         fi
 
         # researcher
-        if ! omeka-s-cli user:list --json | jq -e '.[] | select(.email == "researcher@example.com")' >/dev/null; then
+        if ! omeka-s-cli user:exists "researcher@example.com" >/dev/null 2>&1; then
           echo "Creating user researcher@example.com with role researcher..."
           omeka-s-cli user:add "researcher@example.com" "Researcher" researcher "1234"
         else
