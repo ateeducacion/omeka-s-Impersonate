@@ -1,7 +1,7 @@
 services:
 
   omekas:
-    image: erseco/alpine-omeka-s:develop
+    image: erseco/alpine-omeka-s:4.2
     restart: unless-stopped
     depends_on:
       - mariadb
@@ -16,17 +16,26 @@ services:
       DB_PASSWORD: omeka
       DB_PORT: 3306
 
-      # Omeka initial admin + site
+      # Core install. The container ignores the blueprint's `install`, so keep
+      # these in line with blueprint.json (an existing admin is never changed).
       OMEKA_ADMIN_EMAIL: admin@example.com
-      OMEKA_ADMIN_NAME: "Site Administrator"
-      OMEKA_ADMIN_PASSWORD: PLEASE_CHANGEME
-      OMEKA_SITE_TITLE: "Omeka S Sample Site"
+      OMEKA_ADMIN_NAME: admin
+      OMEKA_ADMIN_PASSWORD: password
+      OMEKA_SITE_TITLE: "Impersonate Playground"
+      OMEKA_LOCALE: es
+      OMEKA_TIMEZONE: Atlantic/Canary
+
+      # The same blueprint.json as Omeka S Playground (the five test users, this
+      # module, settings), re-applied on every start. x-playground is ignored.
+      OMEKA_BLUEPRINT: /var/www/html/volume/modules/Impersonate/blueprint.json
+      # Keep the stack up if the blueprint fails (e.g. no network), instead of a restart loop
+      OMEKA_BLUEPRINT_ON_ERROR: warn
 
       # Optional but recommended so CLI jobs build correct URLs
       SITE_URL: http://localhost:8080
       APPLICATION_ENV: development
 
-      # Auto-install theme/modules (names or URLs). CSVImport must be present.
+      # Dev tools only: the module and the test users come from the blueprint
       OMEKA_THEMES: "default"
       OMEKA_MODULES: |
         Common
@@ -36,53 +45,6 @@ services:
 
       # Auto-import sample data on first boot
       OMEKA_CSV_IMPORT_FILE: /data/sample_data.csv
-      PRE_CONFIGURE_COMMANDS: |
-        echo 'This is a pre-configure command'
-      POST_CONFIGURE_COMMANDS: |
-        echo 'This is a post-configure command'
-
-        # site_admin
-        if ! omeka-s-cli user:exists "siteadmin@example.com" >/dev/null 2>&1; then
-          echo "Creating user siteadmin@example.com with role site_admin..."
-          omeka-s-cli user:add "siteadmin@example.com" "Site Admin" site_admin "1234"
-        else
-          echo "User siteadmin@example.com already exists. Skipping."
-        fi
-
-        # editor
-        if ! omeka-s-cli user:exists "editor@example.com" >/dev/null 2>&1; then
-          echo "Creating user editor@example.com with role editor..."
-          omeka-s-cli user:add "editor@example.com" "Editor" editor "1234"
-        else
-          echo "User editor@example.com already exists. Skipping."
-        fi
-
-        # author
-        if ! omeka-s-cli user:exists "author@example.com" >/dev/null 2>&1; then
-          echo "Creating user author@example.com with role author..."
-          omeka-s-cli user:add "author@example.com" "Author" author "1234"
-        else
-          echo "User author@example.com already exists. Skipping."
-        fi
-
-        # reviewer
-        if ! omeka-s-cli user:exists "reviewer@example.com" >/dev/null 2>&1; then
-          echo "Creating user reviewer@example.com with role reviewer..."
-          omeka-s-cli user:add "reviewer@example.com" "Reviewer" reviewer "1234"
-        else
-          echo "User reviewer@example.com already exists. Skipping."
-        fi
-
-        # researcher
-        if ! omeka-s-cli user:exists "researcher@example.com" >/dev/null 2>&1; then
-          echo "Creating user researcher@example.com with role researcher..."
-          omeka-s-cli user:add "researcher@example.com" "Researcher" researcher "1234"
-        else
-          echo "User researcher@example.com already exists. Skipping."
-        fi
-
-        # enable Impersonate module
-        omeka-s-cli module:install Impersonate
 
     volumes:
       - omekas_data:/var/www/html/volume:Z
