@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ateeducacion.github.io/omeka-s-playground/assets/blueprints/blueprint-schema.json",
+  "$schema": "https://omeka-s-contrib.github.io/omeka-s-blueprints/schema/v0/blueprint-schema.json",
   "meta": {
     "title": "Impersonate Playground Blueprint",
     "author": "ateeducacion",
@@ -9,18 +9,15 @@
     "php": "8.3",
     "omeka": "4.2.0"
   },
-  "debug": {
-    "enabled": true
-  },
-  "landingPage": "/admin/user",
-  "siteOptions": {
+  "install": {
     "title": "Impersonate Playground",
     "locale": "es",
-    "timezone": "Atlantic/Canary"
-  },
-  "login": {
-    "email": "admin@example.com",
-    "password": "password"
+    "timezone": "Atlantic/Canary",
+    "admin": {
+      "name": "admin",
+      "email": "admin@example.com",
+      "password": "password"
+    }
   },
   "users": [
     {
@@ -70,10 +67,7 @@
     {
       "name": "Impersonate",
       "state": "activate",
-      "source": {
-        "type": "url",
-        "url": "https://github.com/ateeducacion/omeka-s-Impersonate/archive/refs/heads/main.zip"
-      }
+      "source": "https://github.com/ateeducacion/omeka-s-Impersonate/archive/refs/heads/main.zip"
     }
   ],
   "itemSets": [
@@ -114,12 +108,20 @@
       ]
     }
   ],
-  "site": {
-    "title": "Impersonate Demo",
-    "slug": "demo",
-    "theme": "default",
-    "summary": "Instalación lista para probar Impersonate con varios roles y recursos de ejemplo en Omeka S Playground.",
-    "isPublic": true,
-    "setAsDefault": true
+  "sites": [
+    {
+      "title": "Impersonate Demo",
+      "slug": "demo",
+      "theme": "default",
+      "summary": "Instalación lista para probar Impersonate con varios roles y recursos de ejemplo en Omeka S Playground.",
+      "isPublic": true,
+      "setAsDefault": true
+    }
+  ],
+  "x-playground": {
+    "debug": {
+      "enabled": true
+    },
+    "landingPage": "/admin/user"
   }
 }
