@@ -66,7 +66,7 @@ The environment automatically creates several users with different roles:
 
 | Email                                                   | Role         | Password        |
 | ------------------------------------------------------- | ------------ | --------------- |
-| [admin@example.com](mailto:admin@example.com)           | global_admin | PLEASE_CHANGEME |
+| [admin@example.com](mailto:admin@example.com)           | global_admin | password        |
 | [siteadmin@example.com](mailto:siteadmin@example.com)   | site_admin   | 1234            |
 | [editor@example.com](mailto:editor@example.com)         | editor       | 1234            |
 | [author@example.com](mailto:author@example.com)         | author       | 1234            |
