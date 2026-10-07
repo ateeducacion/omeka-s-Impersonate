@@ -26,7 +26,7 @@ services:
       OMEKA_TIMEZONE: Atlantic/Canary
 
       # The same blueprint.json as Omeka S Playground (the five test users, this
-      # module, settings), re-applied on every start. x-playground is ignored.
+      # module, the demo site, settings), re-applied on every start. x-playground is ignored.
       OMEKA_BLUEPRINT: /var/www/html/volume/modules/Impersonate/blueprint.json
       # Keep the stack up if the blueprint fails (e.g. no network), instead of a restart loop
       OMEKA_BLUEPRINT_ON_ERROR: warn
